@@ -1,0 +1,18 @@
+{
+    "contents" : "source(\"magcarlibrate.R\")\nsource(\"function.R\")\n\nreadExpData = function(file_6A, file_88,ahead = 0,behind = 0){\n  acc_6A = read.csv(file_6A,header = F)\n  acc_88 = read.csv(file_88,header = F)\n  if (nrow(acc_6A) > nrow(acc_88)) {\n    len = nrow(acc_88)\n  }else{\n    len = nrow(acc_6A)\n  }\n  acc_6A = acc_6A[(1+ahead):(len-behind),]\n  acc_88 = acc_88[(1+behind):(len-ahead),]\n  len = nrow(acc_6A)\n  \n  fg6A = filterGravity(acc_6A$V1,acc_6A$V2,acc_6A$V3,len)\n  fg88 = filterGravity(acc_88$V1,acc_88$V2,acc_88$V3,len)\n  cacc6A = combineVectors(fg6A[[2]])\n  cacc88 = combineVectors(fg88[[2]])\n  \n  pg6A = projection(fg6A[[1]][,1],fg6A[[1]][,2],fg6A[[1]][,3],fg6A[[2]][,1],fg6A[[2]][,2],fg6A[[2]][,3])\n  pg88 = projection(fg88[[1]][,1],fg88[[1]][,2],fg88[[1]][,3],fg88[[2]][,1],fg88[[2]][,2],fg88[[2]][,3])\n  \n  allData = list(acc_6A = acc_6A,acc_88=acc_88,fg6A=fg6A,fg88=fg88,cacc6A=cacc6A,cacc88=cacc88,pg6A=pg6A,pg88=pg88,lacc6A = fg6A[[2]],lacc88 = fg88[[2]])\n  return(allData)\n}\n\nreadGRYData = function(file_6A, file_88, ahead = 0, behind = 0){\n  gyr_6A = read.csv(file_6A,header = F)\n  gyr_88 = read.csv(file_88,header = F)\n  if (nrow(gyr_6A) > nrow(gyr_88)) {\n    len = nrow(gyr_88)\n  }else{\n    len = nrow(gyr_6A)\n  }\n  gyr_6A = gyr_6A[(1+ahead):(len-behind),]\n  gyr_88 = gyr_88[(1+behind):(len-ahead),]\n  len = nrow(gyr_6A)\n  allData = list(gyr_6A = gyr_6A, gyr_88 = gyr_88)\n  return(allData)\n}\n\n#expData = readExpData(file_6A, file_88)\n",
+    "created" : 1442922107585.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "712176800",
+    "id" : "CB2A6DED",
+    "lastKnownWriteTime" : 1448352469,
+    "path" : "~/workspace/R/handshake_9_11/DataLoader.R",
+    "project_path" : "DataLoader.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "type" : "r_source"
+}

@@ -1,0 +1,18 @@
+{
+    "contents" : "source(\"DataLoader.R\")\nsource(\"function.R\")\nsource(\"model/GloableConvert.R\")\nfile6A = \"../handshake/1124/1124_ACC.csv\"\n\nacc_6A = read.csv(file_6A,header = F)\n\nfileGYR6A = \"../handshake/1124/1124_GYR.csv\"\n\ngyr_6A = read.csv(fileGYR6A,header = F)\n\nlen = nrow(acc_6A)\n\nfg6A = filterGravity(acc_6A$V1,acc_6A$V2,acc_6A$V3,len)\ninitMatrix = I\n\nrtMats = updateMatrixByMultiGYR(gyr_6A, initMatrix ,0)\n\np1 = matrix(\n  c(10,0,0),nrow = 3, ncol = 1, byrow = T\n)\np2 = matrix(\n  c(3,0,0),nrow = 3, ncol = 1, byrow = T\n)\nps1 = data.frame()\nps1 = rbind(ps1, c(p1[1,1],p1[2,1],p1[3,1]))\nps2 = data.frame()\nps2 = rbind(ps2, c(p2[1,1],p2[2,1],p2[3,1]))\nfor(i in 1:nrow(rtMats)){\n  rtMat = matrix(as.numeric(rtMats[i,]), nrow= 3, ncol = 3 )\n  p = rtMat %*% p1\n  ps1 = rbind(ps1,c(p[1,1],p[2,1],p[3,1]))\n  p = rtMat %*% p2\n  ps2 = rbind(ps2,c(p[1,1],p[2,1],p[3,1]))\n}\n\nopen3d()\nplot3d(ps1[,1],ps1[,2],ps1[,3],type = \"p\",ylim = c(-10,10) )\n\n# for(i in 1:nrow(ps1)){\n#   segments3d(c(1,ps1[i,1]),c(0,ps1[i,2]),c(0,ps1[i,3]),col=2,lwd=2)\n# }\n\n\n\n\n\n\n",
+    "created" : 1451353975763.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2411111685",
+    "id" : "81499512",
+    "lastKnownWriteTime" : 1448351474,
+    "path" : "~/workspace/R/handshake_9_11/ConvertTest2.R",
+    "project_path" : "ConvertTest2.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "type" : "r_source"
+}

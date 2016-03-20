@@ -1,0 +1,36 @@
+{
+    "debugBreakpointsState" : {
+        "breakpoints" : [
+            {
+                "editor_line_number" : 25,
+                "editor_state" : 1,
+                "function_name" : "toplevel",
+                "function_steps" : "",
+                "id" : 5,
+                "is_package_breakpoint" : false,
+                "is_pending_debug_completion" : false,
+                "line_number" : 25,
+                "needs_updated_steps" : false,
+                "package_name" : "",
+                "path" : "~/workspace/R/handshake_9_11/GlobalConvertTest.R",
+                "state" : 1,
+                "type" : 1
+            },
+            {
+                "editor_line_number" : 17,
+                "editor_state" : 1,
+                "function_name" : "toplevel",
+                "function_steps" : "",
+                "id" : 6,
+                "is_package_breakpoint" : false,
+                "is_pending_debug_completion" : false,
+                "line_number" : 17,
+                "needs_updated_steps" : false,
+                "package_name" : "",
+                "path" : "~/workspace/R/handshake_9_11/ConvertTest2.R",
+                "state" : 1,
+                "type" : 1
+            }
+        ]
+    }
+}

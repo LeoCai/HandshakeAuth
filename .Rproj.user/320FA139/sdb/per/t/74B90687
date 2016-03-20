@@ -1,0 +1,18 @@
+{
+    "contents" : "source(\"./function.R\")\nlibrary(zoo)\n\nfile_6A = \"../handshake/1125/raw/acc_mi.csv\"\nfile_88 = \"../handshake/1125/raw/acc_sam.csv\"\n\n\n#5单位平滑，消除噪点\n#已阈值消除微小移动\n#用大于窗口平均值的点作为峰值\n#寻找地一个峰值开始的点\ndetect = function(file_6A){\n  acc_6A = read.csv(file_6A,header = F)\n  acc_6A = acc_6A[1:200,]\n  len = nrow(acc_6A)\n  fg6A = filterGravity(acc_6A$V1,acc_6A$V2,acc_6A$V3,len)\n  cacc6A = combineVectors(fg6A[[2]])\n  # plot(cacc6A,type=\"l\")\n  plot(cacc6A,type = \"l\")\n  varRoll = rollapply(cacc6A,10,sd, align = c(\"center\"))\n  plot(varRoll,type=\"l\")\n  meanRoll = rollapply(cacc6A,5,mean)\n  peakRoll = rollapply(meanRoll, 5,\n                       function(x){ xCenterIndex = (length(x)+1)/2;\n                         \n                         if(x[xCenterIndex] > 5&& x[xCenterIndex]>x[xCenterIndex-1] && x[xCenterIndex]>x[xCenterIndex+1]&& x[xCenterIndex] > (mean(x) + 0.5*sd(x)) ) return (x[xCenterIndex]) else return (0) }\n                      )\n  meanPeak = mean(peakRoll[peakRoll>0])\n  sdPeak = sd(peakRoll[peakRoll>0])\n  # plot(varRoll,type=\"l\")\n  plot(peakRoll,type=\"l\")\n  peakRoll = rollapply(peakRoll, 1, \n            function(x){ if(x>meanPeak) return(2) else if(x!=0) return (1) else return(0)  })\n  # print(varRoll)\n  peakIndexs = which(peakRoll>0)\n  startIndex = peakIndexs[1]\n  endIndex = peakIndexs[length(peakIndexs)]\n  plot(peakRoll[startIndex:endIndex],type=\"l\")\n  \n  \n}\ndetect(file_6A)\ndetect(file_88)\n\n\n\n\n\n\n\n",
+    "created" : 1450663173240.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2765913992",
+    "id" : "74B90687",
+    "lastKnownWriteTime" : 1450837179,
+    "path" : "~/workspace/R/handshake_9_11/online/Detection.R",
+    "project_path" : "online/Detection.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "type" : "r_source"
+}

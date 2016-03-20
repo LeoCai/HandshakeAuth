@@ -1,0 +1,13 @@
+{
+    "path" : "~/workspace/R/handshake_9_11/model",
+    "sortOrder" : [
+        {
+            "ascending" : false,
+            "columnIndex" : 4
+        },
+        {
+            "ascending" : true,
+            "columnIndex" : 2
+        }
+    ]
+}
